@@ -11,16 +11,16 @@ body {
     max-width: 350px;
     margin: 30px auto;
     padding: 24px;
-    background: #cce6ff;
+    background: #e6ccff;
     border-radius: 12px;
-    box-shadow: 0 0 12px #66ccff;
+    box-shadow: 0 0 12px #cc99ff;
     text-align: center;
 }
 
 h1 {
     font-size: 26px;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px #0099cc;
+    text-shadow: 0 0 10px #9966cc;
 }
 
 input, select, textarea {
@@ -29,15 +29,15 @@ input, select, textarea {
     margin: 14px 0;
     padding: 16px;
     border-radius: 10px;
-    border: 1px solid #99ccff;
+    border: 1px solid #b366ff;
     background-color: #f2f2f2;
     color: #333;
     font-size: 16px;
-    text-shadow: 0 0 5px #66ccff;
+    text-shadow: 0 0 5px #9966cc;
 }
 
 textarea {
-    background-color: #e6f2ff;
+    background-color: #f2e6ff;
     width: 90%;
     height: 100px;
     resize: vertical;
@@ -46,8 +46,8 @@ textarea {
 button {
     width: 70%;
     padding: 10px;
-    background-color: #0099cc;
-    border: 2px solid #66ccff;
+    background-color: #9966cc;
+    border: 2px solid #b366ff;
     border-radius: 10px;
     color: #fff;
     font-size: 18px;
@@ -56,8 +56,8 @@ button {
 }
 
 button:hover {
-    box-shadow: 0 0 10px #66ccff;
-    background-color: #007399;
+    box-shadow: 0 0 10px #cc99ff;
+    background-color: #7a288a;
 }
 
 @media (min-width: 768px) {
@@ -73,7 +73,7 @@ button:hover {
 
 footer {
     text-align: center;
-    text-shadow: 0 0 10px #0099cc;
+    text-shadow: 0 0 10px #9966cc;
     color: #333;
     position: relative;
     bottom: 0;
