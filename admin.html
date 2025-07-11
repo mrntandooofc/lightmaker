@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .file-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+        <h2>Uploaded Files:</h2>
+        <ul class="file-list" id="file-list"></ul>
+        <button onclick="deleteAllFiles()">Delete All Files</button>
+    </div>
+
+    <script>
+        fetch('/get-files')
+            .then(response => response.json())
+            .then(files => {
+                const fileList = document.getElementById('file-list');
+                files.forEach(file => {
+                    const li = document.createElement('li');
+                    li.textContent = file;
+                    fileList.appendChild(li);
+                });
+            });
+
+        function deleteAllFiles() {
+            fetch('/delete-all-files', { method: 'DELETE' })
+                .then(response => response.json())
+                .then(() => {
+                    const fileList = document.getElementById('file-list');
+                    fileList.innerHTML = '';
+                });
+        }
+    </script>
+</body>
+</html>
