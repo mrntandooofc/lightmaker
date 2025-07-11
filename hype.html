@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Group Link Uploader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            width: 100%;
+            height: 40px;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>WhatsApp Group Link Uploader</h2>
+        <form id="link-form">
+            <label for="link-type">Link Type:</label>
+            <select id="link-type" name="link-type">
+                <option value="group">Group</option>
+                <option value="channel">Channel</option>
+            </select>
+            <label for="link">WhatsApp Link:</label>
+            <input type="text" id="link" name="link" required>
+            <label for="followers">Number of Followers:</label>
+            <input type="number" id="followers" name="followers" required>
+            <button type="submit">Upload Link</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('link-form');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const linkType = document.getElementById('link-type').value;
+            const link = document.getElementById('link').value;
+            const followers = document.getElementById('followers').value;
+
+            // Validate WhatsApp link
+            if (!link.startsWith('https:                         
+                resultDiv.innerHTML = 'Invalid WhatsApp link';
+                return;
+            }
+
+            // Upload link to server or store in local storage
+            // For demonstration purposes, we'll just display the link and followers
+            resultDiv.innerHTML = `Link Type: ${linkType}<br>Link: ${link}<br>Followers: ${followers}`;
+        });
+    </script>
+</body>
+</html>
