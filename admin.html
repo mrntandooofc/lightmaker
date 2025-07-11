@@ -8,56 +8,93 @@
         body {
             font-family: Arial, sans-serif;
         }
-        .container {
+        .admin-panel {
             max-width: 800px;
             margin: 40px auto;
             padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .file-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .project-list {
+            margin-top: 20px;
         }
-        .file-list li {
+        .project-item {
             padding: 10px;
             border-bottom: 1px solid #ccc;
         }
-        .file-list li:last-child {
+        .project-item:last-child {
             border-bottom: none;
+        }
+        .login-form {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Admin Panel</h1>
-        <h2>Uploaded Files:</h2>
-        <ul class="file-list" id="file-list"></ul>
-        <button onclick="deleteAllFiles()">Delete All Files</button>
+    <div class="admin-panel">
+        <h2>Admin Panel</h2>
+        <div id="login-form" class="login-form">
+            <h3>Login</h3>
+            <form id="login-form-element">
+                <label for="username">Username:</label>
+                <input type="text" id="11ntando" name="username"><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="00000" name="password"><br><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <div id="project-list-container" style="display: none;">
+            <h3>Project List</h3>
+            <div class="project-list" id="project-list"></div>
+            <button onclick="logout()">Logout</button>
+        </div>
     </div>
 
     <script>
-        fetch('/get-files')
-            .then(response => response.json())
-            .then(files => {
-                const fileList = document.getElementById('file-list');
-                files.forEach(file => {
-                    const li = document.createElement('li');
-                    li.textContent = file;
-                    fileList.appendChild(li);
-                });
-            });
+        const adminUsername = 'admin';
+        const adminPassword = 'password';
 
-        function deleteAllFiles() {
-            fetch('/delete-all-files', { method: 'DELETE' })
+        document.getElementById('login-form-element').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === adminUsername && password === adminPassword) {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('project-list-container').style.display = 'block';
+
+                // Fetch project list from API
+                fetch('/api/projects')
                 .then(response => response.json())
-                .then(() => {
-                    const fileList = document.getElementById('file-list');
-                    fileList.innerHTML = '';
-                });
+                .then(projects => {
+                    const projectList = document.getElementById('project-list');
+                    projects.forEach(project => {
+                        const projectItem = document.createElement('div');
+                        projectItem.classList.add('project-item');
+                        projectItem.innerHTML = `
+                            <h4>${project.projectName}</h4>
+                            <p>${project.projectDescription}</p>
+                        `;
+                        projectList.appendChild(projectItem);
+                    });
+                })
+                .catch(error => console.error(error));
+            } else {
+                alert('Invalid username or password');
+            }
+        });
+
+        // Show login form
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('login-form').style.display = 'block';
+        });
+
+        // Logout function
+        function logout() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('project-list-container').style.display = 'none';
+            document.getElementById('project-list').innerHTML = '';
         }
     </script>
 </body>
