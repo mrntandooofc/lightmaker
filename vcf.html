@@ -16,13 +16,13 @@
 
  @keyframes gradient {
  0% {
- background-position:0% 50%;
+ background-position:0%50%;
  }
  50% {
- background-position:100% 50%;
+ background-position:100%50%;
  }
  100% {
- background-position:0% 50%;
+ background-position:0%50%;
  }
  }
 
@@ -63,10 +63,11 @@
  <input type="text" id="name" placeholder="Name">
  <input type="text" id="phone" placeholder="Phone Number">
  <button id="add-contact">Add Contact</button>
- <span id="contact-count">Contacts: 0/1000</span>
+ <span id="contact-count">Contacts:0/1000</span>
  </div>
 
  <script>
+ document.addEventListener('DOMContentLoaded', function() {
  let contacts = new Map(); // Using a Map to avoid duplicate numbers
 
  // Load contacts from localStorage
@@ -77,7 +78,6 @@
  updateContactCount();
  }
 
- document.addEventListener('DOMContentLoaded', function() {
  const fileInput = document.getElementById('vcf-file');
  const uploadBtn = document.getElementById('upload-btn');
  const contactsListDiv = document.getElementById('contacts-list');
