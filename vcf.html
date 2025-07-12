@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>VCF Contacts Manager</title>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ }
+ #contacts-list {
+ margin-top:20px;
+ }
+ </style>
+</head>
+<body>
+ <h2>VCF Contacts Manager</h2>
+ <input type="file" id="vcf-file" accept=".vcf" style="display:none;">
+ <button id="upload-btn">Upload VCF</button>
+ <div id="contacts-list"></div>
+ <button id="download-vcf">Download VCF</button>
+ <input type="text" id="name" placeholder="Name">
+ <input type="text" id="phone" placeholder="Phone Number">
+ <button id="add-contact">Add Contact</button>
+
+ <script>
+ let contacts = new Map(); // Using a Map to avoid duplicate numbers
+
+ document.addEventListener('DOMContentLoaded', function() {
+ const fileInput = document.getElementById('vcf-file');
+ const uploadBtn = document.getElementById('upload-btn');
+ const contactsListDiv = document.getElementById('contacts-list');
+ const downloadVcfBtn = document.getElementById('download-vcf');
+ const addContactBtn = document.getElementById('add-contact');
+ const nameInput = document.getElementById('name');
+ const phoneInput = document.getElementById('phone');
+
+ uploadBtn.addEventListener('click', function() {
+ fileInput.click();
+ });
+
+ fileInput.addEventListener('change', function(event) {
+ const file = event.target.files[0];
+ if (file) {
+ const reader = new FileReader();
+ reader.onload = function(event) {
+ const vcfContent = event.target.result;
+ parseVCF(vcfContent);
+ displayContacts();
+ };
+ reader.readAsText(file);
+ }
+ });
+
+ addContactBtn.addEventListener('click', function() {
+ const name = nameInput.value.trim();
+ const phone = phoneInput.value.trim();
+ if (name && phone && !contacts.has(phone)) {
+ contacts.set(phone, name);
+ displayContacts();
+ nameInput.value = '';
+ phoneInput.value = '';
+ }
+ });
+
+ downloadVcfBtn.addEventListener('click', function() {
+ const vcfContent = generateVCF();
+ const blob = new Blob([vcfContent], {type: 'text/vcard'});
+ const url = URL.createObjectURL(blob);
+ const a = document.createElement('a');
+ a.href = url;
+ a.download = 'contacts.vcf';
+ a.click();
+ URL.revokeObjectURL(url);
+ });
+
+ function parseVCF(content) {
+ const lines = content.split('\n');
+ let name, phone;
+ for (let line of lines) {
+ line = line.trim();
+ if (line.startsWith('FN:')) {
+ name = line.substring(3).trim();
+ } else if (line.startsWith('TEL;')) {
+ phone = line.split(':')[1].trim();
+ if (phone && !contacts.has(phone)) {
+ contacts.set(phone, name);
+ }
+ }
+ }
+ }
+
+ function displayContacts() {
+ let html = '<ul>';
+ for (let [phone, name] of contacts) {
+ html += `<li>${name} - ${phone}</li>`;
+ }
+ html += '</ul>';
+ contactsListDiv.innerHTML = html;
+ }
+
+ function generateVCF() {
+ let vcfContent = '';
+ for (let [phone, name] of contacts) {
+ vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEND:VCARD\n`;
+ }
+ return vcfContent;
+ }
+ });
+ </script>
+</body>
+</html>
