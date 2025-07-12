@@ -46,6 +46,14 @@
  #admin-login.show {
  display: block;
  }
+
+ #add-contact-div {
+ display: none;
+ }
+
+ #add-contact-div.show {
+ display: block;
+ }
  </style>
 </head>
 <body>
@@ -63,14 +71,17 @@
  </div>
  <div id="contacts-list"></div>
  <button id="download-vcf">Download VCF</button>
+ <div id="add-contact-div">
  <input type="text" id="name" placeholder="Name">
  <input type="text" id="phone" placeholder="Phone Number">
  <button id="add-contact">Add Contact</button>
+ </div>
  <span id="contact-count">Contacts:0</span>
  </div>
 
  <script>
  let contacts = [];
+ let uploadedContacts = [];
  let vcfFile;
  let isAdmin = false;
 
@@ -89,6 +100,7 @@
  const passwordInput = document.getElementById('password');
  const loginBtn = document.getElementById('login-btn');
  const adminPanel = document.getElementById('admin-panel');
+ const addContactDiv = document.getElementById('add-contact-div');
 
  adminBtn.addEventListener('click', function () {
  adminLoginDiv.classList.toggle('show');
@@ -101,6 +113,7 @@
  isAdmin = true;
  adminPanel.style.display = 'block';
  adminLoginDiv.classList.remove('show');
+ addContactDiv.classList.add('show');
  } else {
  alert('Invalid username or password');
  }
@@ -116,22 +129,23 @@
 
  fileInput.addEventListener('change', function (event) {
  const files = event.target.files;
- if (files.length > 0) {
+ if (files.length >0) {
  vcfFile = files[0];
  const reader = new FileReader();
  reader.onload = function (event) {
  const vcfContent = event.target.result;
- contacts = parseVCF(vcfContent);
+ uploadedContacts = parseVCF(vcfContent);
+ localStorage.setItem('uploadedContacts', JSON.stringify(uploadedContacts));
+ localStorage.setItem('vcfFile', vcfFile.name);
  displayContacts();
  updateContactCount();
- localStorage.setItem('contacts', JSON.stringify(contacts));
- localStorage.setItem('vcfFile', vcfFile.name);
  };
  reader.readAsText(vcfFile);
  }
  });
 
  addContactBtn.addEventListener('click', function () {
+ if (isAdmin) {
  const name = nameInput.value.trim();
  const phone = phoneInput.value.trim();
  if (name && phone) {
@@ -142,10 +156,17 @@
  phoneInput.value = '';
  localStorage.setItem('contacts', JSON.stringify(contacts));
  }
+ } else {
+ alert('You are not authorized to add contacts');
+ }
  });
 
  downloadVcfBtn.addEventListener('click', function () {
- const vcfContent = generateVCF();
+ let allContacts = [...contacts];
+ if (localStorage.getItem('uploadedContacts')) {
+ allContacts = allContacts.concat(JSON.parse(localStorage.getItem('uploadedContacts')));
+ }
+ const vcfContent = generateVCF(allContacts);
  if (vcfFile) {
  const vcfFileName = localStorage.getItem('vcfFile');
  downloadBlob(vcfContent, vcfFileName);
@@ -156,8 +177,16 @@
 
  if (localStorage.getItem('contacts')) {
  contacts = JSON.parse(localStorage.getItem('contacts'));
+ if (isAdmin) {
  displayContacts();
  updateContactCount();
+ } else {
+ if (localStorage.getItem('uploadedContacts')) {
+ uploadedContacts = JSON.parse(localStorage.getItem('uploadedContacts'));
+ displayContacts();
+ updateContactCount();
+ }
+ }
  }
 
  function parseVCF(content) {
@@ -181,14 +210,22 @@
 
  function displayContacts() {
  let html = '<ul>';
+ if (isAdmin) {
  for (let contact of contacts) {
  html += `<li>${contact.name} - ${contact.phone}</li>`;
+ }
+ }
+ if (localStorage.getItem('uploadedContacts')) {
+ const uploadedContacts = JSON.parse(localStorage.getItem('uploadedContacts'));
+ for (let contact of uploadedContacts) {
+ html += `<li>${contact.name} - ${contact.phone}</li>`;
+ }
  }
  html += '</ul>';
  contactsListDiv.innerHTML = html;
  }
 
- function generateVCF() {
+ function generateVCF(contacts) {
  let vcfContent = '';
  for (let contact of contacts) {
  vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:${contact.name}\nTEL:${contact.phone}\nEND:VCARD\n`;
@@ -207,7 +244,11 @@
  }
 
  function updateContactCount() {
- contactCountSpan.textContent = `Contacts: ${contacts.length}`;
+ let count = contacts.length;
+ if (localStorage.getItem('uploadedContacts')) {
+ count += JSON.parse(localStorage.getItem('uploadedContacts')).length;
+ }
+ contactCountSpan.textContent = `Contacts: ${count}`;
  }
  });
  </script>
