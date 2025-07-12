@@ -1,172 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VCF Contacts Manager</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, #3a3d41, #2b2f33);
-            height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>VCF Contacts Manager</title>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ background: linear-gradient(45deg, #3a3d41, #2b2f33);
+ height:100vh;
+ margin:0;
+ padding:20px;
+ }
 
-        .glowing-box {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
+ .glowing-box {
+ background-color: rgba(255,255,255,0.1);
+ padding:20px;
+ border-radius:10px;
+ box-shadow:0010px rgba(255,255,255,0.2);
+ }
 
-        #contacts-list {
-            margin-top: 20px;
-        }
+ #contacts-list {
+ margin-top:20px;
+ }
 
-        #contacts-list ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+ #contacts-list ul {
+ list-style: none;
+ padding:0;
+ margin:0;
+ }
 
-        #contacts-list li {
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
+ #contacts-list li {
+ padding:10px;
+ border-bottom:1px solid rgba(255,255,255,0.2);
+ }
 
-        #contacts-list li:last-child {
-            border-bottom: none;
-        }
-    </style>
+ #contacts-list li:last-child {
+ border-bottom: none;
+ }
+
+ #admin-login {
+ display: none;
+ }
+
+ #admin-login.show {
+ display: block;
+ }
+ </style>
 </head>
 <body>
-    <div class="glowing-box">
-        <h2>VCF Contacts Manager</h2>
-        <input type="file" id="vcf-file" accept=".vcf" style="display:none;" multiple>
-        <button id="upload-btn">Upload VCF</button>
-        <div id="contacts-list"></div>
-        <button id="download-vcf">Download VCF</button>
-        <input type="text" id="name" placeholder="Name">
-        <input type="text" id="phone" placeholder="Phone Number">
-        <button id="add-contact">Add Contact</button>
-        <span id="contact-count">Contacts: 0</span>
-    </div>
+ <div class="glowing-box">
+ <h2>VCF Contacts Manager</h2>
+ <button id="admin-btn">Admin Login</button>
+ <div id="admin-login">
+ <input type="text" id="username" placeholder="ntando06">
+ <input type="password" id="password" placeholder="ntando0206">
+ <button id="login-btn">Login</button>
+ </div>
+ <div id="admin-panel" style="display: none;">
+ <input type="file" id="vcf-file" accept=".vcf" style="display:none;" multiple>
+ <button id="upload-btn">Upload VCF</button>
+ </div>
+ <div id="contacts-list"></div>
+ <button id="download-vcf">Download VCF</button>
+ <input type="text" id="name" placeholder="Name">
+ <input type="text" id="phone" placeholder="Phone Number">
+ <button id="add-contact">Add Contact</button>
+ <span id="contact-count">Contacts:0</span>
+ </div>
 
-    <script>
-        let contacts = [];
-        let vcfFile;
+ <script>
+ let contacts = [];
+ let vcfFile;
+ let isAdmin = false;
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const fileInput = document.getElementById('vcf-file');
-            const uploadBtn = document.getElementById('upload-btn');
-            const contactsListDiv = document.getElementById('contacts-list');
-            const downloadVcfBtn = document.getElementById('download-vcf');
-            const addContactBtn = document.getElementById('add-contact');
-            const nameInput = document.getElementById('name');
-            const phoneInput = document.getElementById('phone');
-            const contactCountSpan = document.getElementById('contact-count');
+ document.addEventListener('DOMContentLoaded', function () {
+ const fileInput = document.getElementById('vcf-file');
+ const uploadBtn = document.getElementById('upload-btn');
+ const contactsListDiv = document.getElementById('contacts-list');
+ const downloadVcfBtn = document.getElementById('download-vcf');
+ const addContactBtn = document.getElementById('add-contact');
+ const nameInput = document.getElementById('name');
+ const phoneInput = document.getElementById('phone');
+ const contactCountSpan = document.getElementById('contact-count');
+ const adminBtn = document.getElementById('admin-btn');
+ const adminLoginDiv = document.getElementById('admin-login');
+ const usernameInput = document.getElementById('username');
+ const passwordInput = document.getElementById('password');
+ const loginBtn = document.getElementById('login-btn');
+ const adminPanel = document.getElementById('admin-panel');
 
-            uploadBtn.addEventListener('click', function () {
-                fileInput.click();
-            });
+ adminBtn.addEventListener('click', function () {
+ adminLoginDiv.classList.toggle('show');
+ });
 
-            fileInput.addEventListener('change', function (event) {
-                const files = event.target.files;
-                if (files.length > 0) {
-                    vcfFile = files[0];
-                    const reader = new FileReader();
-                    reader.onload = function (event) {
-                        const vcfContent = event.target.result;
-                        contacts = parseVCF(vcfContent);
-                        displayContacts();
-                        updateContactCount();
-                    };
-                    reader.readAsText(vcfFile);
-                }
-            });
+ loginBtn.addEventListener('click', function () {
+ const username = usernameInput.value.trim();
+ const password = passwordInput.value.trim();
+ if (username === 'mrntando06' && password === 'ntando06') {
+ isAdmin = true;
+ adminPanel.style.display = 'block';
+ adminLoginDiv.classList.remove('show');
+ } else {
+ alert('Invalid username or password');
+ }
+ });
 
-            addContactBtn.addEventListener('click', function () {
-                const name = nameInput.value.trim();
-                const phone = phoneInput.value.trim();
-                if (name && phone) {
-                    contacts.push({ name, phone });
-                    displayContacts();
-                    updateContactCount();
-                    nameInput.value = '';
-                    phoneInput.value = '';
-                }
-            });
+ uploadBtn.addEventListener('click', function () {
+ if (isAdmin) {
+ fileInput.click();
+ } else {
+ alert('You are not authorized to upload VCF files');
+ }
+ });
 
-            downloadVcfBtn.addEventListener('click', function () {
-                const vcfContent = generateVCF();
-                if (vcfFile) {
-                    const reader = new FileReader();
-                    reader.onload = function (event) {
-                        const existingVcfContent = event.target.result;
-                        const mergedVcfContent = mergeVCF(existingVcfContent, vcfContent);
-                        downloadBlob(mergedVcfContent, vcfFile.name);
-                    };
-                    reader.readAsText(vcfFile);
-                } else {
-                    downloadBlob(vcfContent, 'contacts.vcf');
-                }
-            });
+ fileInput.addEventListener('change', function (event) {
+ const files = event.target.files;
+ if (files.length > 0) {
+ vcfFile = files[0];
+ const reader = new FileReader();
+ reader.onload = function (event) {
+ const vcfContent = event.target.result;
+ contacts = parseVCF(vcfContent);
+ displayContacts();
+ updateContactCount();
+ localStorage.setItem('contacts', JSON.stringify(contacts));
+ localStorage.setItem('vcfFile', vcfFile.name);
+ };
+ reader.readAsText(vcfFile);
+ }
+ });
 
-            function parseVCF(content) {
-                const contacts = [];
-                const lines = content.split('\n');
-                let name, phone;
-                for (let line of lines) {
-                    line = line.trim();
-                    if (line.startsWith('FN:')) {
-                        name = line.substring(3).trim();
-                    } else if (line.startsWith('TEL;')) {
-                        phone = line.split(':')[1].trim();
-                        if (phone && name) {
-                            contacts.push({ name, phone });
-                            name = phone = null;
-                        }
-                    }
-                }
-                return contacts;
-            }
+ addContactBtn.addEventListener('click', function () {
+ const name = nameInput.value.trim();
+ const phone = phoneInput.value.trim();
+ if (name && phone) {
+ contacts.push({ name, phone });
+ displayContacts();
+ updateContactCount();
+ nameInput.value = '';
+ phoneInput.value = '';
+ localStorage.setItem('contacts', JSON.stringify(contacts));
+ }
+ });
 
-            function displayContacts() {
-                let html = '<ul>';
-                for (let contact of contacts) {
-                    html += `<li>${contact.name} - ${contact.phone}</li>`;
-                }
-                html += '</ul>';
-                contactsListDiv.innerHTML = html;
-            }
+ downloadVcfBtn.addEventListener('click', function () {
+ const vcfContent = generateVCF();
+ if (vcfFile) {
+ const vcfFileName = localStorage.getItem('vcfFile');
+ downloadBlob(vcfContent, vcfFileName);
+ } else {
+ downloadBlob(vcfContent, 'contacts.vcf');
+ }
+ });
 
-            function generateVCF() {
-                let vcfContent = '';
-                for (let contact of contacts) {
-                    vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:${contact.name}\nTEL:${contact.phone}\nEND:VCARD\n`;
-                }
-                return vcfContent;
-            }
+ if (localStorage.getItem('contacts')) {
+ contacts = JSON.parse(localStorage.getItem('contacts'));
+ displayContacts();
+ updateContactCount();
+ }
 
-            function mergeVCF(existingVcfContent, newVcfContent) {
-                return existingVcfContent + newVcfContent;
-            }
+ function parseVCF(content) {
+ const contacts = [];
+ const lines = content.split('\n');
+ let name, phone;
+ for (let line of lines) {
+ line = line.trim();
+ if (line.startsWith('FN:')) {
+ name = line.substring(3).trim();
+ } else if (line.startsWith('TEL;')) {
+ phone = line.split(':')[1].trim();
+ if (phone && name) {
+ contacts.push({ name, phone });
+ name = phone = null;
+ }
+ }
+ }
+ return contacts;
+ }
 
-            function downloadBlob(content, filename) {
-                const blob = new Blob([content], { type: 'text/vcard' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = filename;
-                a.click();
-                URL.revokeObjectURL(url);
-            }
+ function displayContacts() {
+ let html = '<ul>';
+ for (let contact of contacts) {
+ html += `<li>${contact.name} - ${contact.phone}</li>`;
+ }
+ html += '</ul>';
+ contactsListDiv.innerHTML = html;
+ }
 
-            function updateContactCount() {
-                contactCountSpan.textContent = `Contacts: ${contacts.length}`;
-            }
-        });
-    </script>
+ function generateVCF() {
+ let vcfContent = '';
+ for (let contact of contacts) {
+ vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:${contact.name}\nTEL:${contact.phone}\nEND:VCARD\n`;
+ }
+ return vcfContent;
+ }
+
+ function downloadBlob(content, filename) {
+ const blob = new Blob([content], { type: 'text/vcard' });
+ const url = URL.createObjectURL(blob);
+ const a = document.createElement('a');
+ a.href = url;
+ a.download = filename;
+ a.click();
+ URL.revokeObjectURL(url);
+ }
+
+ function updateContactCount() {
+ contactCountSpan.textContent = `Contacts: ${contacts.length}`;
+ }
+ });
+ </script>
 </body>
 </html>
