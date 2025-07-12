@@ -9,43 +9,43 @@
  font-family: Arial, sans-serif;
  background: linear-gradient(45deg, #3a3d41, #2b2f33);
  animation: gradient 10s ease infinite;
- height: 100vh;
- margin: 0;
- padding: 20px;
+ height:100vh;
+ margin:0;
+ padding:20px;
  }
 
  @keyframes gradient {
  0% {
- background-position: 0% 50%;
+ background-position:0% 50%;
  }
  50% {
- background-position: 100% 50%;
+ background-position:100% 50%;
  }
  100% {
- background-position: 0% 50%;
+ background-position:0% 50%;
  }
  }
 
  .glowing-box {
- background-color: rgba(255, 255, 255, 0.1);
- padding: 20px;
- border-radius: 10px;
- box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+ background-color: rgba(255,255,255,0.1);
+ padding:20px;
+ border-radius:10px;
+ box-shadow:0 0 10px rgba(255,255,255,0.2);
  }
 
  #contacts-list {
- margin-top: 20px;
+ margin-top:20px;
  }
 
  #contacts-list ul {
  list-style: none;
- padding: 0;
- margin: 0;
+ padding:0;
+ margin:0;
  }
 
  #contacts-list li {
- padding: 10px;
- border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+ padding:10px;
+ border-bottom:1px solid rgba(255,255,255,0.2);
  }
 
  #contacts-list li:last-child {
@@ -67,7 +67,6 @@
 
  <script>
  let contacts = new Map(); // Using a Map to avoid duplicate numbers
- let existingContacts = new Map();
 
  document.addEventListener('DOMContentLoaded', function() {
  const fileInput = document.getElementById('vcf-file');
@@ -88,7 +87,7 @@
  const reader = new FileReader();
  reader.onload = function(event) {
  const vcfContent = event.target.result;
- parseVCF(vcfContent, true);
+ parseVCF(vcfContent);
  displayContacts();
  };
  reader.readAsText(file);
@@ -117,7 +116,7 @@
  URL.revokeObjectURL(url);
  });
 
- function parseVCF(content, isUpload = false) {
+ function parseVCF(content) {
  const lines = content.split('\n');
  let name, phone;
  for (let line of lines) {
@@ -126,13 +125,8 @@
  name = line.substring(3).trim();
  } else if (line.startsWith('TEL;')) {
  phone = line.split(':')[1].trim();
- if (phone && (!contacts.has(phone) || isUpload)) {
- if (isUpload) {
- existingContacts.set(phone, name);
+ if (phone && !contacts.has(phone)) {
  contacts.set(phone, name);
- } else {
- contacts.set(phone, name);
- }
  }
  }
  }
