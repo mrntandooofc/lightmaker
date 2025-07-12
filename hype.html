@@ -23,87 +23,40 @@
  text-decoration: none;
  color: #007bff;
  }
- .admin-panel {
- background-color: #f0f0f0;
- padding:10px;
- border-radius:5px;
- margin-bottom:10px;
- }
  </style>
 </head>
 <body>
  <div class="container">
  <h2>WhatsApp Group/Channel Links</h2>
  <form id="linkForm">
- <label for="type">Type:</label>
- <select id="type" name="type">
- <option value="group">Group</option>
- <option value="channel">Channel</option>
- </select><br><br>
- <label for="link">WhatsApp Link:</label>
+ <label for="link">WhatsApp Group/Channel Link:</label>
  <input type="text" id="link" name="link"><br><br>
- <label for="followers">Followers:</label>
- <input type="number" id="followers" name="followers"><br><br>
- <label for="password">Password:</label>
- <input type="password" id="password" name="password"><br><br>
  <input type="submit" value="Upload Link">
  </form>
  <div id="linksContainer"></div>
- <div id="adminPanel" class="admin-panel" style="display: none;">
- <h3>Admin Panel</h3>
- <label for="adminUsername">Username:</label>
- <input type="text" id="adminUsername" name="adminUsername"><br><br>
- <label for="adminPassword">Password:</label>
- <input type="password" id="adminPassword" name="adminPassword"><br><br>
- <input type="button" id="adminLogin" value="Login">
- <div id="adminLinksContainer" style="display: none;"></div>
- </div>
  </div>
 
  <script>
  let links = [];
- let adminUsername = 'mrntando06';
- let adminPassword = 'ntando06';
 
  document.getElementById('linkForm').addEventListener('submit', (e) => {
  e.preventDefault();
- const type = document.getElementById('type').value;
  const link = document.getElementById('link').value;
- const followers = document.getElementById('followers').value;
- const password = document.getElementById('password').value;
 
- if (link && followers && password === adminPassword) {
+ if (link) {
  // Basic validation for WhatsApp link
- if ((type === 'group' && link.startsWith('https://chat.whatsapp.com/')) || (type === 'channel' && link.startsWith('https://whatsapp.com/channel/'))) {
- links.push({ type, link, followers });
+ if (link.startsWith('https://chat.whatsapp.com/') || link.startsWith('https://whatsapp.com/channel/')) {
+ links.push(link);
  displayLinks();
  } else {
- alert('Invalid WhatsApp link. Please enter a valid WhatsApp ' + type + ' link.');
+ alert('Invalid WhatsApp link. Please enter a valid WhatsApp group or channel link.');
  }
  } else {
- if (password !== adminPassword) {
- alert('Invalid admin password');
- } else {
- alert('Please fill in all fields');
- }
+ alert('Please enter a link');
  }
 
  // Clear form field
  document.getElementById('link').value = '';
- document.getElementById('followers').value = '';
- });
-
- document.getElementById('adminLogin').addEventListener('click', () => {
- const username = document.getElementById('adminUsername').value;
- const password = document.getElementById('adminPassword').value;
-
- if (username === adminUsername && password === adminPassword) {
- document.getElementById('adminPanel').style.display = 'block';
- document.getElementById('adminLinksContainer').style.display = 'block';
- displayAdminLinks();
- } else {
- alert('Invalid admin credentials');
- }
  });
 
  function displayLinks() {
@@ -115,37 +68,11 @@
  linkDisplay.classList.add('link-display');
 
  const linkElement = document.createElement('a');
- linkElement.href = link.link;
- linkElement.textContent = `Join WhatsApp ${link.type} ${index +1} (${link.followers} followers)`;
+ linkElement.href = link;
+ linkElement.textContent = `Join WhatsApp Group/Channel ${index +1}`;
 
  linkDisplay.appendChild(linkElement);
  linksContainer.appendChild(linkDisplay);
- });
- }
-
- function displayAdminLinks() {
- const adminLinksContainer = document.getElementById('adminLinksContainer');
- adminLinksContainer.innerHTML = '';
-
- links.forEach((link, index) => {
- const linkDisplay = document.createElement('div');
- linkDisplay.classList.add('link-display');
-
- const linkElement = document.createElement('a');
- linkElement.href = link.link;
- linkElement.textContent = `Join WhatsApp ${link.type} ${index +1} (${link.followers} followers)`;
-
- const deleteButton = document.createElement('button');
- deleteButton.textContent = 'Delete';
- deleteButton.onclick = () => {
- links.splice(index, 1);
- displayAdminLinks();
- displayLinks();
- };
-
- linkDisplay.appendChild(linkElement);
- linkDisplay.appendChild(deleteButton);
- adminLinksContainer.appendChild(linkDisplay);
  });
  }
  </script>

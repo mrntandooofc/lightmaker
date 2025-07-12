@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Contact Owner</title>
+ <style>
+ /* Simple styling for the form */
+ body {
+ background: linear-gradient(45deg, #ff69b4, #ffe6f2, #ff99cc);
+ background-size: 400% 400%;
+ animation: glowing 10s ease infinite;
+ }
+ @keyframes glowing {
+ 0% {
+ background-position: 0% 50%;
+ }
+ 50% {
+ background-position: 100% 50%;
+ }
+ 100% {
+ background-position: 0% 50%;
+ }
+ }
+ form {
+ width:50%;
+ margin: auto;
+ padding:20px;
+ border:1px solid #ccc;
+ border-radius:5px;
+ box-shadow:0 0 10px rgba(0,0,0,0.1);
+ background-color: #fff;
+ }
+ label {
+ display: block;
+ margin-bottom:10px;
+ }
+ input, textarea {
+ width:100%;
+ padding:10px;
+ margin-bottom:20px;
+ border:1px solid #ddd;
+ }
+ button[type="submit"] {
+ background-color: #007bff;
+ color: white;
+ padding:10px;
+ border: none;
+ border-radius:5px;
+ cursor: pointer;
+ }
+ button[type="submit"]:hover {
+ background-color: #0069d9;
+ }
+ </style>
+</head>
+<body>
+
+<form id="contactOwnerForm">
+ <h2>Send Report/Review to Owner</h2>
+ <label for="userName">Your Name:</label>
+ <input type="text" id="userName" name="userName" required>
+
+ <label for="userMessage">Your Report/Review:</label>
+ <textarea id="userMessage" name="userMessage" rows="5" required></textarea>
+
+ <!-- The owner's number is not visible to the user and is sent via the form action or backend logic -->
+ <input type="hidden" id="ownerNumber" name="ownerNumber" value="263777124998">
+
+ <button type="submit">Send via WhatsApp</button>
+</form>
+
+<script>
+ const form = document.getElementById('contactOwnerForm');
+
+ form.addEventListener('submit', function(event) {
+ event.preventDefault(); // Prevents the default form submission behavior
+
+ const userName = document.getElementById('userName').value;
+ const userMessage = document.getElementById('userMessage').value;
+ const ownerNumber = document.getElementById('ownerNumber').value;
+
+ // Send message via WhatsApp
+ const whatsappUrl = `https://wa.me/${ownerNumber}?text=Name: ${userName}%0AReport/Review: ${userMessage}`;
+ window.open(whatsappUrl, '_blank');
+
+ alert('Report/Review sent successfully!');
+ });
+</script>
+
+</body>
+</html>
