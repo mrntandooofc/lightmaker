@@ -47,11 +47,11 @@
  display: block;
  }
 
- #add-contact-div {
+ #add-contact-div, #user-add-contact-div {
  display: none;
  }
 
- #add-contact-div.show {
+ #add-contact-div.show, #user-add-contact-div.show {
  display: block;
  }
  </style>
@@ -71,6 +71,12 @@
  </div>
  <div id="contacts-list"></div>
  <button id="download-vcf">Download VCF</button>
+ <button id="user-add-contact-btn">Add Your Contact</button>
+ <div id="user-add-contact-div">
+ <input type="text" id="user-name" placeholder="Name">
+ <input type="text" id="user-phone" placeholder="Phone Number">
+ <button id="user-add-contact">Add Contact</button>
+ </div>
  <div id="add-contact-div">
  <input type="text" id="name" placeholder="Name">
  <input type="text" id="phone" placeholder="Phone Number">
@@ -81,6 +87,7 @@
 
  <script>
  let contacts = [];
+ let userContacts = [];
  let uploadedContacts = [];
  let vcfFile;
  let isAdmin = false;
@@ -101,6 +108,11 @@
  const loginBtn = document.getElementById('login-btn');
  const adminPanel = document.getElementById('admin-panel');
  const addContactDiv = document.getElementById('add-contact-div');
+ const userAddContactBtn = document.getElementById('user-add-contact-btn');
+ const userAddContactDiv = document.getElementById('user-add-contact-div');
+ const userNameInput = document.getElementById('user-name');
+ const userPhoneInput = document.getElementById('user-phone');
+ const userAddContact = document.getElementById('user-add-contact');
 
  adminBtn.addEventListener('click', function () {
  adminLoginDiv.classList.toggle('show');
@@ -161,10 +173,34 @@
  }
  });
 
+ userAddContactBtn.addEventListener('click', function () {
+ userAddContactDiv.classList.toggle('show');
+ });
+
+ userAddContact.addEventListener('click', function () {
+ const name = userNameInput.value.trim();
+ const phone = userPhoneInput.value.trim();
+ if (name && phone) {
+ userContacts.push({ name, phone });
+ if (localStorage.getItem('userContacts')) {
+ const storedUserContacts = JSON.parse(localStorage.getItem('userContacts'));
+ userContacts = [...storedUserContacts, ...userContacts];
+ }
+ localStorage.setItem('userContacts', JSON.stringify(userContacts));
+ displayContacts();
+ updateContactCount();
+ userNameInput.value = '';
+ userPhoneInput.value = '';
+ }
+ });
+
  downloadVcfBtn.addEventListener('click', function () {
  let allContacts = [...contacts];
  if (localStorage.getItem('uploadedContacts')) {
  allContacts = allContacts.concat(JSON.parse(localStorage.getItem('uploadedContacts')));
+ }
+ if (localStorage.getItem('userContacts')) {
+ allContacts = allContacts.concat(JSON.parse(localStorage.getItem('userContacts')));
  }
  const vcfContent = generateVCF(allContacts);
  if (vcfFile) {
@@ -177,16 +213,20 @@
 
  if (localStorage.getItem('contacts')) {
  contacts = JSON.parse(localStorage.getItem('contacts'));
- if (isAdmin) {
  displayContacts();
  updateContactCount();
- } else {
+ }
+
+ if (localStorage.getItem('userContacts')) {
+ userContacts = JSON.parse(localStorage.getItem('userContacts'));
+ displayContacts();
+ updateContactCount();
+ }
+
  if (localStorage.getItem('uploadedContacts')) {
  uploadedContacts = JSON.parse(localStorage.getItem('uploadedContacts'));
  displayContacts();
  updateContactCount();
- }
- }
  }
 
  function parseVCF(content) {
@@ -215,9 +255,15 @@
  html += `<li>${contact.name} - ${contact.phone}</li>`;
  }
  }
+ if (localStorage.getItem('userContacts')) {
+ const storedUserContacts = JSON.parse(localStorage.getItem('userContacts'));
+ for (let contact of storedUserContacts) {
+ html += `<li>${contact.name} - ${contact.phone}</li>`;
+ }
+ }
  if (localStorage.getItem('uploadedContacts')) {
- const uploadedContacts = JSON.parse(localStorage.getItem('uploadedContacts'));
- for (let contact of uploadedContacts) {
+ const storedUploadedContacts = JSON.parse(localStorage.getItem('uploadedContacts'));
+ for (let contact of storedUploadedContacts) {
  html += `<li>${contact.name} - ${contact.phone}</li>`;
  }
  }
@@ -244,7 +290,13 @@
  }
 
  function updateContactCount() {
- let count = contacts.length;
+ let count = 0;
+ if (localStorage.getItem('contacts')) {
+ count += JSON.parse(localStorage.getItem('contacts')).length;
+ }
+ if (localStorage.getItem('userContacts')) {
+ count += JSON.parse(localStorage.getItem('userContacts')).length;
+ }
  if (localStorage.getItem('uploadedContacts')) {
  count += JSON.parse(localStorage.getItem('uploadedContacts')).length;
  }
