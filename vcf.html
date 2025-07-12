@@ -56,13 +56,14 @@
 <body>
  <div class="glowing-box">
  <h2>VCF Contacts Manager</h2>
- <input type="file" id="vcf-file" accept=".vcf" style="display:none;">
+ <input type="file" id="vcf-file" accept=".vcf" style="display:none;" multiple>
  <button id="upload-btn">Upload VCF</button>
  <div id="contacts-list"></div>
  <button id="download-vcf">Download VCF</button>
  <input type="text" id="name" placeholder="Name">
  <input type="text" id="phone" placeholder="Phone Number">
  <button id="add-contact">Add Contact</button>
+ <span id="contact-count">Contacts: 0/1000</span>
  </div>
 
  <script>
@@ -73,6 +74,7 @@
  const storedContacts = JSON.parse(localStorage.contacts);
  storedContacts.forEach(([phone, name]) => contacts.set(phone, name));
  displayContacts();
+ updateContactCount();
  }
 
  document.addEventListener('DOMContentLoaded', function() {
@@ -83,13 +85,16 @@
  const addContactBtn = document.getElementById('add-contact');
  const nameInput = document.getElementById('name');
  const phoneInput = document.getElementById('phone');
+ const contactCountSpan = document.getElementById('contact-count');
 
  uploadBtn.addEventListener('click', function() {
  fileInput.click();
  });
 
  fileInput.addEventListener('change', function(event) {
- const file = event.target.files[0];
+ const files = event.target.files;
+ if (files.length > 0) {
+ Array.from(files).forEach(file => {
  if (file) {
  const reader = new FileReader();
  reader.onload = function(event) {
@@ -97,20 +102,26 @@
  parseVCF(vcfContent);
  displayContacts();
  saveContactsToLocalStorage();
+ updateContactCount();
  };
  reader.readAsText(file);
+ }
+ });
  }
  });
 
  addContactBtn.addEventListener('click', function() {
  const name = nameInput.value.trim();
  const phone = phoneInput.value.trim();
- if (name && phone && !contacts.has(phone)) {
+ if (name && phone && !contacts.has(phone) && contacts.size < 1000) {
  contacts.set(phone, name);
  displayContacts();
  saveContactsToLocalStorage();
+ updateContactCount();
  nameInput.value = '';
  phoneInput.value = '';
+ } else if (contacts.size >= 1000) {
+ alert('Maximum contacts reached!');
  }
  });
 
@@ -134,8 +145,10 @@
  name = line.substring(3).trim();
  } else if (line.startsWith('TEL;')) {
  phone = line.split(':')[1].trim();
- if (phone && !contacts.has(phone)) {
+ if (phone && !contacts.has(phone) && contacts.size < 1000) {
  contacts.set(phone, name);
+ } else if (contacts.size >= 1000) {
+ alert('Maximum contacts reached!');
  }
  }
  }
@@ -161,6 +174,10 @@
  function saveContactsToLocalStorage() {
  const contactsArray = Array.from(contacts);
  localStorage.contacts = JSON.stringify(contactsArray);
+ }
+
+ function updateContactCount() {
+ contactCountSpan.textContent = `Contacts: ${contacts.size}/1000`;
  }
  });
  </script>
