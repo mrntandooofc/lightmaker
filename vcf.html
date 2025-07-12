@@ -68,6 +68,13 @@
  <script>
  let contacts = new Map(); // Using a Map to avoid duplicate numbers
 
+ // Load contacts from localStorage
+ if (localStorage.contacts) {
+ const storedContacts = JSON.parse(localStorage.contacts);
+ storedContacts.forEach(([phone, name]) => contacts.set(phone, name));
+ displayContacts();
+ }
+
  document.addEventListener('DOMContentLoaded', function() {
  const fileInput = document.getElementById('vcf-file');
  const uploadBtn = document.getElementById('upload-btn');
@@ -89,6 +96,7 @@
  const vcfContent = event.target.result;
  parseVCF(vcfContent);
  displayContacts();
+ saveContactsToLocalStorage();
  };
  reader.readAsText(file);
  }
@@ -100,6 +108,7 @@
  if (name && phone && !contacts.has(phone)) {
  contacts.set(phone, name);
  displayContacts();
+ saveContactsToLocalStorage();
  nameInput.value = '';
  phoneInput.value = '';
  }
@@ -147,6 +156,11 @@
  vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEND:VCARD\n`;
  }
  return vcfContent;
+ }
+
+ function saveContactsToLocalStorage() {
+ const contactsArray = Array.from(contacts);
+ localStorage.contacts = JSON.stringify(contactsArray);
  }
  });
  </script>
