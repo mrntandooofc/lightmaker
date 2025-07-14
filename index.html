@@ -1,343 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GODLY TECH IS DEV SITE</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0b1a3d, #1d3261);
-            color: #fff;
-            background-size: cover;
-            background-position: center;
-            overflow-x: hidden;
-        }
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>GODLY TECH IS DEV SITE</title>
+ <style>
+ body {
+ margin:0;
+ font-family: Arial, sans-serif;
+ background: linear-gradient(135deg, #0b1a3d, #1d3261);
+ color: #fff;
+ background-size: cover;
+ background-position: center;
+ overflow-x: hidden;
+ }
 
-        .container {
-            max-width: 480px;
-            margin: 30px auto;
-            padding: 10px 20px;
-        }
+ .container {
+ max-width:1200px;
+ margin:30px auto;
+ padding:10px 20px;
+ }
 
-        h1 {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #ffffff;
-            text-shadow: 0 0 10px #2FD1F4;
-        }
+ h1 {
+ text-align: center;
+ font-size:2rem;
+ font-weight: bold;
+ margin-bottom:20px;
+ color: #ffffff;
+ text-shadow:0 0 10px #2FD1F4;
+ }
 
-        .card-button {
-            display: block;
-            background: #1d3261;
-            border-radius: 12px;
-            border: 2px solid #14718B87;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-decoration: none;
-            color: #ffffff;
-            box-shadow: 0 4px 8px rgba(37, 38, 39, 0.58);
-            text-shadow: 0 0 10px rgba(11, 184, 206, 1);
-            transition: background 0.3s ease;
-        }
+ .card-container {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 20px;
+ justify-content: center;
+ }
 
-        .card-button:hover {
-            background: #2a4b8c;
-            box-shadow: 0 0 10px rgba(3, 157, 255, 1);
-            text-shadow: 0 0 10px rgba(255, 250, 255, 1);
-        }
+ .card-button {
+ display: block;
+ background: #1d3261;
+ border-radius:12px;
+ border:2px solid #14718B87;
+ padding:20px;
+ width: calc(25% - 20px);
+ text-decoration: none;
+ color: #ffffff;
+ box-shadow:0 4px 8px rgba(37,38,39,0.58);
+ text-shadow:0 0 10px rgba(11,184,206,1);
+ transition: background 0.3s ease;
+ }
 
-        .card-button h2 {
-            margin: 0 0 8px 0;
-            font-size: 1.3rem;
-        }
+ .card-button:hover {
+ background: #2a4b8c;
+ box-shadow:0 0 10px rgba(3,157,255,1);
+ text-shadow:0 0 10px rgba(255,250,255,1);
+ }
 
-        .card-button p {
-            margin: 0;
-            font-size: 0.95rem;
-            opacity: 0.85;
-        }
+ .card-button h2 {
+ margin:0 0 8px 0;
+ font-size:1.3rem;
+ }
 
-        .button-container {
-            background: linear-gradient(90deg, #4A86E8AD, #7EB5FBA3);
-            border-radius: 20px;
-            padding: 15px 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            text-shadow: 0 0 10px #16ACD6;
-            border: 2px solid #14718B87;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 5px 10px rgba(67, 114, 140, 0.7);
-        }
+ .card-button p {
+ margin:0;
+ font-size:0.95rem;
+ opacity:0.85;
+ }
 
-        .button-container a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-            transition: background 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-        }
+ .button-container {
+ background: linear-gradient(90deg, #4A86E8AD, #7EB5FBA3);
+ border-radius:20px;
+ padding:15px 20px;
+ display: flex;
+ flex-wrap: wrap;
+ gap:10px;
+ text-shadow:0 0 10px #16ACD6;
+ border:2px solid #14718B87;
+ justify-content: space-between;
+ align-items: center;
+ box-shadow:0 5px 10px rgba(67,114,140,0.7);
+ }
 
-        .button-container a:hover {
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 10px #00B4FF;
-        }
+ .button-container a {
+ color: #fff;
+ text-decoration: none;
+ font-weight: bold;
+ padding:8px 15px;
+ background: rgba(255,255,255,0.15);
+ border-radius:10px;
+ transition: background 0.3s ease;
+ display: inline-flex;
+ align-items: center;
+ }
 
-        #background-style {
-            margin-bottom: 20px;
-        }
+ .button-container a:hover {
+ background: rgba(255,255,255,0.3);
+ box-shadow:0 0 10px #00B4FF;
+ }
 
-        #background-style label {
-            display: block;
-            margin-bottom: 10px;
-        }
+ #background-style {
+ margin-bottom:20px;
+ }
 
-        #background-style select {
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            background: #1d3261;
-            color: #fff;
-        }
+ #background-style label {
+ display: block;
+ margin-bottom:10px;
+ }
 
-        #project-upload {
-            margin-bottom: 20px;
-        }
+ #background-style select {
+ padding:10px;
+ border: none;
+ border-radius:10px;
+ background: #1d3261;
+ color: #fff;
+ }
 
-        #project-upload label {
-            display: block;
-            margin-bottom: 10px;
-        }
+ #project-upload {
+ margin-bottom:20px;
+ }
 
-        #project-upload input[type="file"] {
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            background: #1d3261;
-            color: #fff;
-        }
+ #project-upload label {
+ display: block;
+ margin-bottom:10px;
+ }
 
-        #project-upload button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            background: #2a4b8c;
-            color: #fff;
-            cursor: pointer;
-        }
+ #project-upload input[type="file"] {
+ padding:10px;
+ border: none;
+ border-radius:10px;
+ background: #1d3261;
+ color: #fff;
+ }
 
-        .animation {
-            position: relative;
-            width: 100%;
-            height: 50px;
-            margin-bottom: 20px;
-        }
+ #project-upload button {
+ padding:10px 20px;
+ border: none;
+ border-radius:10px;
+ background: #2a4b8c;
+ color: #fff;
+ cursor: pointer;
+ }
 
-        .animation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, #4A86E8AD, #7EB5FBA3);
-            opacity: 0.5;
-            filter: blur(10px);
-        }
+ .animation {
+ position: relative;
+ width:100%;
+ height:50px;
+ margin-bottom:20px;
+ }
 
-        .animation::after {
-            content: 'Mr Ntando Ofc';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 0 10px #2FD1F4;
-            animation: typing 3s steps(11) infinite;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid #fff;
-        }
+ .animation::before {
+ content: '';
+ position: absolute;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ background: linear-gradient(90deg, #4A86E8AD, #7EB5FBA3);
+ opacity:0.5;
+ filter: blur(10px);
+ }
 
-        @keyframes typing {
-            0% {
-                width: 0;
-            }
-            50% {
-                width: 100%;
-            }
-            100% {
-                width: 0;
-            }
-        }
-    </style>
+ .animation::after {
+ content: 'Mr Ntando Ofc';
+ position: absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%, -50%);
+ font-size:24px;
+ font-weight: bold;
+ color: #fff;
+ text-shadow:0 0 10px #2FD1F4;
+ animation: typing 3s steps(11) infinite;
+ overflow: hidden;
+ white-space: nowrap;
+ border-right:2px solid #fff;
+ }
+
+ @keyframes typing {
+ 0% {
+ width:0;
+ }
+ 50% {
+ width:100%;
+ }
+ 100% {
+ width:0;
+ }
+ }
+ </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>GODLY TECH IS DEV SITE</h1>
-        <div class="animation"></div>
+ <div class="container">
+ <h1>GODLY TECH IS DEV SITE</h1>
+ <div class="animation"></div>
 
-        <!-- Background Style -->
-        <div id="background-style">
-            <label for="background-select">Select Background Style:</label>
-            <select id="background-select" onchange="changeBackgroundStyle(this.value)">
-                <option value="default">Default</option>
-                <option value="dark">Dark</option>
-                <option value="light">Light</option>
-                <option value="image">Image</option>
-            </select>
-        </div>
+ <!-- Background Style -->
+ <div id="background-style">
+ <label for="background-select">Select Background Style:</label>
+ <select id="background-select" onchange="changeBackgroundStyle(this.value)">
+ <option value="default">Default</option>
+ <option value="dark">Dark</option>
+ <option value="light">Light</option>
+ <option value="image">Image</option>
+ </select>
+ </div>
 
-        <!-- Project Upload -->
-        <div id="project-upload">
-            <label for="project-file">Upload Your Project:</label>
-            <input type="file" id="project-file" />
-            <button onclick="uploadProject()">Upload</button>
-            <div id="upload-status"></div>
-        </div>
+ <!-- Project Upload -->
+ <div id="project-upload">
+ <label for="project-file">Upload Your Project:</label>
+ <input type="file" id="project-file" />
+ <button onclick="uploadProject()">Upload</button>
+ <div id="upload-status"></div>
+ </div>
 
-        <!-- AI Tools Button -->
-        <a href="html.html" class="card-button" target="_blank">
-            <h2></> Html code run</h2>
-            <p>run html code</p>
-        </a>
+ <!-- Card Container -->
+ <div class="card-container">
+ <!-- AI Tools Button -->
+ <a href="html.html" class="card-button" target="_blank" style="background: #3498db;">
+ <h2></> Html code run</h2>
+ <p>run html code</p>
+ </a>
 
-        <!-- Coding Button -->
-        <a href="extractor.html" class="card-button" target="_blank">
-            <h2>Extractor</h2>
-            <p>website source code finder</p>
-        </a>
-        <a href="gpt.html" class="card-button" target="_blank">
-            <h2>ChatGPT</h2>
-            <p>Advanced Artificial intelligence</p>
-        </a>
-        <a href="netntando.html" class="card-button" target="_blank">
-            <h2>Netntando</h2>
-            <p>download movies from Netflix, moviebox and more made by Mr Ntando Ofc </p>
-        </a>
-        <a href="report.html" class="card-button" target="_blank">
-            <h2>Report</h2>
-            <p>send us report</p>
-        </a>
+ <!-- Coding Button -->
+ <a href="extractor.html" class="card-button" target="_blank" style="background: #e74c3c;">
+ <h2>Extractor</h2>
+ <p>website source code finder</p>
+ </a>
+ <a href="gpt.html" class="card-button" target="_blank" style="background: #2ecc71;">
+ <h2>ChatGPT</h2>
+ <p>Advanced Artificial intelligence</p>
+ </a>
+ <a href="netntando.html" class="card-button" target="_blank" style="background: #9b59b6;">
+ <h2>Netntando</h2>
+ <p>download movies from Netflix, moviebox and more made by Mr Ntando Ofc </p>
+ </a>
+ <a href="report.html" class="card-button" target="_blank" style="background: #1abc9c;">
+ <h2>Report</h2>
+ <p>send us report</p>
+ </a>
 
-        <a href="admin.html" class="card-button" target="_blank">
-            <h2>Admin</h2>
-            <p>website source code finder</p>
-        </a>
-        <a href="hype.html" class="card-button" target="_blank">
-            <h2>Hype WhatsApp Channels and Group Links</h2>
-            <p>made with love </p>
-        </a>
-        <a href="netflix.html" class="card-button" target="_blank">
-            <h2>Netflix Premium</h2>
-            <p>All features unlocked by Mr Ntando Ofc</p>
-        </a>
-        <a href="vcf.html" class="card-button" target="_blank">
-            <h2>Increase Status Views</h2>
-            <p>WhatsApp status views increase made by Mr Ntando Ofc</p>
-        </a>
+ <a href="admin.html" class="card-button" target="_blank" style="background: #f1c40f;">
+ <h2>Admin</h2>
+ <p>website source code finder</p>
+ </a>
+ <a href="hype.html" class="card-button" target="_blank" style="background: #d35400;">
+ <h2>Hype WhatsApp Channels and Group Links</h2>
+ <p>made with love </p>
+ </a>
+ <a href="netflix.html" class="card-button" target="_blank" style="background: #e67e22;">
+ <h2>Netflix Premium</h2>
+ <p>All features unlocked by Mr Ntando Ofc</p>
+ </a>
+ <a href="vcf.html" class="card-button" target="_blank" style="background: #16a085;">
+ <h2>Increase Status Views</h2>
+ <p>WhatsApp status views increase made by Mr Ntando Ofc</p>
+ </a>
 
-        <a href="github.html" class="card-button" target="_blank">
-            <h2>LADYBUG-BOT</h2>
-            <p>best WhatsApp bot with rich features</p>
-        </a>
+ <a href="github.html" class="card-button" target="_blank" style="background: #27ae60;">
+ <h2>LADYBUG-BOT</h2>
+ <p>best WhatsApp bot with rich features</p>
+ </a>
 
-        <a href="pairsite.html" class="card-button" target="_blank">
-            <h2>Pair Site</h2>
-            <p>get creds.json and use it to run Ladybug bot</p>
-        </a>
+ <a href="pairsite.html" class="card-button" target="_blank" style="background: #2980b9;">
+ <h2>Pair Site</h2>
+ <p>get creds.json and use it to run Ladybug bot</p>
+ </a>
 
-        <a href="spotify.html" class="card-button" target="_blank">
-            <h2>Spotify Premium</h2>
-            <p>All features unlocked by Mr Ntando Ofc</p>
-        </a>
+ <a href="spotify.html" class="card-button" target="_blank" style="background: #8e44ad;">
+ <h2>Spotify Premium</h2>
+ <p>All features unlocked by Mr Ntando Ofc</p>
+ </a>
 
-        <!-- Coding Button -->
-        <a href="js.html" class="card-button" target="_blank">
-            <h2>Js Encrypt</h2>
-            <p>Javscript obfuscator tool</p>
-        </a>
+ <!-- Coding Button -->
+ <a href="js.html" class="card-button" target="_blank" style="background: #f39c12;">
+ <h2>Js Encrypt</h2>
+ <p>Javscript obfuscator tool</p>
+ </a>
+ </div>
 
-        <!-- Bottom Button Row -->
-        <div class="button-container">
-            <a href="https://t.me/mrntando" target="_blank"></> learn coding</a>
-            <a href="https://wa.me/263777124998" target="_blank">Our Projects</a>
-            <a href="https://wa.me/263777124998" target="_blank"> Support</a>
-            <a href="https://whatsapp.com/channel/0029VbAhndjKLaHneeiTAy3J" target="_blank">W.A Chanel</a>
-        </div>
+ <!-- Bottom Button Row -->
+ <div class="button-container">
+ <a href="https://t.me/mrntando" target="_blank"></> learn coding</a>
+ <a href="https://wa.me/263777124998" target="_blank">Our Projects</a>
+ <a href="https://wa.me/263777124998" target="_blank"> Support</a>
+ <a href="https://whatsapp.com/channel/0029VbAhndjKLaHneeiTAy3J" target="_blank">W.A Chanel</a>
+ </div>
 
-        <!-- Background Audio -->
-        <audio id="background-audio" loop>
-            <source src="https://files.catbox.moe/q8lo8b.mp3" type="audio/mp3">
-        </audio>
+ <!-- Background Audio -->
+ <audio id="background-audio" loop>
+ <source src="https://files.catbox.moe/q8lo8b.mp3" type="audio/mp3">
+ </audio>
 
-        <script>
-            function changeBackgroundStyle(style) {
-                switch (style) {
-                    case 'default':
-                        document.body.style.background = '#0b1a3d';
-                        break;
-                    case 'dark':
-                        document.body.style.background = '#000';
-                        break;
-                    case 'light':
-                        document.body.style.background = '#fff';
-                        break;
-                    case 'image':
-                        document.body.style.backgroundImage = 'url(https://example.com/background-image.jpg)';
-                        document.body.style.backgroundSize = 'cover';
-                        document.body.style.backgroundPosition = 'center';
-                        break;
-                }
-            }
+ <script>
+ function changeBackgroundStyle(style) {
+ switch (style) {
+ case 'default':
+ document.body.style.background = '#0b1a3d';
+ break;
+ case 'dark':
+ document.body.style.background = '#000';
+ break;
+ case 'light':
+ document.body.style.background = '#fff';
+ break;
+ case 'image':
+ document.body.style.backgroundImage = 'url(https://example.com/background-image.jpg)';
+ document.body.style.backgroundSize = 'cover';
+ document.body.style.backgroundPosition = 'center';
+ break;
+ }
+ }
 
-            async function uploadProject() {
-                const fileInput = document.getElementById('project-file');
-                const file = fileInput.files[0];
-                const uploadStatus = document.getElementById('upload-status');
+ async function uploadProject() {
+ const fileInput = document.getElementById('project-file');
+ const file = fileInput.files[0];
+ const uploadStatus = document.getElementById('upload-status');
 
-                if (file) {
-                    const formData = new FormData();
-                    formData.append('file', file);
+ if (file) {
+ const formData = new FormData();
+ formData.append('file', file);
 
-                    try {
-                        const response = await fetch('/upload', {
-                            method: 'POST',
-                            body: formData,
-                        });
+ try {
+ const response = await fetch('/upload', {
+ method: 'POST',
+ body: formData,
+ });
 
-                        if (response.ok) {
-                            uploadStatus.textContent = 'File uploaded successfully!';
-                        } else {
-                            uploadStatus.textContent = 'Error uploading file';
-                        }
-                    } catch (error) {
-                        console.error(error);
-                        uploadStatus.textContent = 'Error uploading file';
-                    }
-                } else {
-                    uploadStatus.textContent = 'No file selected';
-                }
-            }
+ if (response.ok) {
+ uploadStatus.textContent = 'File uploaded successfully!';
+ } else {
+ uploadStatus.textContent = 'Error uploading file';
+ }
+ } catch (error) {
+ console.error(error);
+ uploadStatus.textContent = 'Error uploading file';
+ }
+ } else {
+ uploadStatus.textContent = 'No file selected';
+ }
+ }
 
-            // Play background audio on page load
-            document.addEventListener('DOMContentLoaded', () => {
-                const audio = document.getElementById('background-audio');
-                audio.play();
-            });
-        </script>
-    </div>
+ // Play background audio on page load
+ document.addEventListener('DOMContentLoaded', () => {
+ const audio = document.getElementById('background-audio');
+ audio.play();
+ });
+ </script>
+ </div>
 </body>
 </html>
