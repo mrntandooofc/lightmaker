@@ -121,11 +121,81 @@
             transition: all 0.3s;
             animation: fadeInUp 1s ease 0.4s both;
             box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            margin: 0 10px;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Download Section */
+        .download-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            color: white;
+        }
+
+        .download-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .download-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            margin-top: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .download-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .download-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
         }
 
         /* Features Section */
@@ -188,6 +258,36 @@
             line-height: 1.6;
         }
 
+        /* API Section */
+        .api-section {
+            padding: 80px 0;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .api-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .api-endpoint {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            word-break: break-all;
+        }
+
         /* Commands Section */
         .commands {
             padding: 80px 0;
@@ -221,6 +321,54 @@
         .command-item p {
             opacity: 0.9;
             font-size: 0.9rem;
+        }
+
+        /* Owner Section */
+        .owner-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .owner-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .owner-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128c7e;
+            transform: translateY(-2px);
         }
 
         /* Stats Section */
@@ -278,6 +426,21 @@
             color: #ff6b6b;
         }
 
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -307,6 +470,17 @@
             .features-grid {
                 grid-template-columns: 1fr;
             }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .download-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
         }
 
         /* Floating Animation */
@@ -326,6 +500,38 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
+        /* Result Section */
+        .download-result {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: none;
+        }
+
+        .result-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .result-details h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .result-details p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -338,9 +544,10 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#download">Download</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#commands">Commands</a></li>
-                <li><a href="#stats">Stats</a></li>
+                <li><a href="#api">API</a></li>
+                <li><a href="#owner">Owner</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -351,9 +558,51 @@
         <div class="hero-content">
             <h1 class="floating">🐞 <span class="gradient-text">Ladybug Bot</span></h1>
             <p>The most advanced WhatsApp bot with powerful features, AI capabilities, and seamless automation</p>
-            <a href="#features" class="cta-button">
-                <i class="fas fa-rocket"></i> Explore Features
-            </a>
+            <div>
+                <a href="#download" class="cta-button">
+                    <i class="fas fa-download"></i> Free Downloads
+                </a>
+                <a href="#features" class="cta-button">
+                    <i class="fas fa-rocket"></i> Explore Features
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <div class="download-container">
+            <h2 class="section-title">🎵 Free Media Downloader</h2>
+            <p>Download videos and music from YouTube, Instagram, TikTok, and more - completely free!</p>
+            
+            <div class="download-form">
+                <div class="input-group">
+                    <input type="url" id="mediaUrl" placeholder="Paste your video/music URL here..." />
+                </div>
+                
+                <div class="download-buttons">
+                    <button class="download-btn" onclick="downloadMedia('mp4')">
+                        <i class="fas fa-video"></i> Download Video (MP4)
+                    </button>
+                    <button class="download-btn" onclick="downloadMedia('mp3')">
+                        <i class="fas fa-music"></i> Download Audio (MP3)
+                    </button>
+                </div>
+
+                <div id="downloadResult" class="download-result">
+                    <div class="result-info">
+                        <img id="resultThumbnail" class="result-thumbnail" src="" alt="Thumbnail">
+                        <div class="result-details">
+                            <h4 id="resultTitle">Title</h4>
+                            <p id="resultDuration">Duration: --:--</p>
+                            <p id="resultSize">Size: -- MB</p>
+                        </div>
+                    </div>
+                    <a id="downloadLink" class="cta-button" href="#" download>
+                        <i class="fas fa-download"></i> Download Now
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -408,6 +657,75 @@
         </div>
     </section>
 
+    <!-- API Section -->
+    <section id="api" class="api-section">
+        <div class="container">
+            <h2 class="section-title">🔌 Ladybug APIs</h2>
+            <p style="text-align: center; margin-bottom: 2rem; opacity: 0.9;">
+                Integrate Ladybug's powerful features into your own applications
+            </p>
+            
+            <div class="api-grid">
+                <div class="api-card">
+                    <h3><i class="fas fa-video"></i> YouTube Downloader API</h3>
+                    <div class="api-endpoint">
+                        GET /api/youtube/download?url={VIDEO_URL}&format={mp4|mp3}
+                    </div>
+                    <p>Download YouTube videos and audio with metadata</p>
+                </div>
+                
+                <div class="api-card">
+                    <h3><i class="fas fa-camera"></i> Instagram Downloader API</h3>
+                    <div class="api-endpoint">
+                        GET /api/instagram/download?url={POST_URL}
+                    </div>
+                    <p>Download Instagram photos, videos, and stories</p>
+                </div>
+                
+                <div class="api-card">
+                    <h3><i class="fas fa-music"></i> TikTok Downloader API</h3>
+                    <div class="api-endpoint">
+                        GET /api/tiktok/download?url={VIDEO_URL}&watermark={true|false}
+                    </div>
+                    <p>Download TikTok videos with or without watermark</p>
+                </div>
+                
+                <div class="api-card">
+                    <h3><i class="fas fa-brain"></i> AI Chat API</h3>
+                    <div class="api-endpoint">
+                        POST /api/ai/chat
+                        {"message": "Your question here"}
+                    </div>
+                    <p>Get AI-powered responses for any question</p>
+                </div>
+                
+                <div class="api-card">
+                    <h3><i class="fas fa-image"></i> Sticker Maker API</h3>
+                    <div class="api-endpoint">
+                        POST /api/sticker/create
+                        {image: base64_image}
+                    </div>
+                    <p>Convert images to WhatsApp stickers</p>
+                </div>
+                
+                <div class="api-card">
+                    <h3><i class="fas fa-cloud"></i> Weather API</h3>
+                    <div class="api-endpoint">
+                        GET /api/weather?city={CITY_NAME}
+                    </div>
+                    <p>Get current weather and forecast data</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="margin-bottom: 1rem;">🔑 Get your free API key by contacting the owner</p>
+                <a href="https://wa.me/263777124998" class="cta-button">
+                    <i class="fab fa-whatsapp"></i> Get API Access
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Commands Section -->
     <section id="commands" class="commands">
         <div class="container">
@@ -445,6 +763,52 @@
                     <h4>🔍 .google [query]</h4>
                     <p>Search Google instantly</p>
                 </div>
+                <div class="command-item">
+                    <h4>📱 .igdl [url]</h4>
+                    <p>Download Instagram content</p>
+                </div>
+                <div class="command-item">
+                    <h4>🎭 .tiktok [url]</h4>
+                    <p>Download TikTok videos</p>
+                </div>
+                <div class="command-item">
+                    <h4>🎪 .meme</h4>
+                    <p>Generate random memes</p>
+                </div>
+                <div class="command-item">
+                    <h4>💰 .crypto [coin]</h4>
+                    <p>Get cryptocurrency prices</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Owner Section -->
+    <section id="owner" class="owner-section">
+        <div class="container">
+            <h2 class="section-title">👨‍💻 Meet The Owner</h2>
+            <div class="owner-card">
+                <div class="owner-avatar">
+                    <i class="fas fa-user-crown"></i>
+                </div>
+                <h3>Mr Ntando Ofc</h3>
+                <p style="font-size: 1.2rem; margin: 1rem 0;">
+                    🚀 Creator & Developer of Ladybug Bot
+                </p>
+                <p style="opacity: 0.9; margin-bottom: 2rem;">
+                    Passionate developer dedicated to creating the best WhatsApp bot experience. 
+                    Available for custom bot development, API integration, and technical support.
+                </p>
+                
+                <div style="margin: 2rem 0;">
+                    <p><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong> +263777124998</p>
+                    <p><i class="fas fa-envelope"></i> <strong>Business Inquiries Welcome</strong></p>
+                    <p><i class="fas fa-code"></i> <strong>Custom Bot Development</strong></p>
+                </div>
+                
+                <a href="https://wa.me/263777124998?text=Hi%20Mr%20Ntando!%20I'm%20interested%20in%20Ladybug%20Bot" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Contact Owner
+                </a>
             </div>
         </div>
     </section>
@@ -470,6 +834,14 @@
                     <h3>24/7</h3>
                     <p>Uptime Guarantee</p>
                 </div>
+                <div class="stat-item">
+                    <h3>500K+</h3>
+                    <p>Downloads Served</p>
+                </div>
+                <div class="stat-item">
+                    <h3>15+</h3>
+                    <p>Supported Platforms</p>
+                </div>
             </div>
         </div>
     </section>
@@ -480,13 +852,16 @@
             <h3>🐞 Ladybug Bot</h3>
             <p>The ultimate WhatsApp assistant for all your needs</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/263777124998"><i class="fab fa-whatsapp"></i></a>
                 <a href="#"><i class="fab fa-telegram"></i></a>
                 <a href="#"><i class="fab fa-github"></i></a>
                 <a href="#"><i class="fab fa-discord"></i></a>
             </div>
-            <p>© 2024 Ladybug Bot. All rights reserved.</p>
+            <p>© 2024 Ladybug Bot by Mr Ntando Ofc. All rights reserved.</p>
             <p>Made with ❤️ for the WhatsApp community</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">
+                Owner: Mr Ntando Ofc | WhatsApp: +263777124998
+            </p>
         </div>
     </footer>
 
@@ -495,9 +870,12 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
@@ -512,6 +890,136 @@
                 header.style.backdropFilter = 'none';
             }
         });
+
+        // Download Media Function
+        async function downloadMedia(format) {
+            const urlInput = document.getElementById('mediaUrl');
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                alert('Please enter a valid URL');
+                return;
+            }
+
+            // Validate URL
+            if (!isValidUrl(url)) {
+                alert('Please enter a valid YouTube, Instagram, or TikTok URL');
+                return;
+            }
+
+            const buttons = document.querySelectorAll('.download-btn');
+            const resultDiv = document.getElementById('downloadResult');
+            
+            // Disable buttons and show loading
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.innerHTML = `<div class="loading"></div> Processing...`;
+            });
+
+            try {
+                // Simulate API call (replace with actual API endpoint)
+                const response = await simulateDownload(url, format);
+                
+                if (response.success) {
+                    showDownloadResult(response.data);
+                } else {
+                    throw new Error(response.message || 'Download failed');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+                console.error('Download error:', error);
+            } finally {
+                // Re-enable buttons
+                buttons.forEach((btn, index) => {
+                    btn.disabled = false;
+                    if (index === 0) {
+                        btn.innerHTML = '<i class="fas fa-video"></i> Download Video (MP4)';
+                    } else {
+                        btn.innerHTML = '<i class="fas fa-music"></i> Download Audio (MP3)';
+                    }
+                });
+            }
+        }
+
+        // Validate URL function
+        function isValidUrl(string) {
+            try {
+                const url = new URL(string);
+                const validDomains = [
+                    'youtube.com', 'youtu.be', 'm.youtube.com',
+                    'instagram.com', 'www.instagram.com',
+                    'tiktok.com', 'www.tiktok.com', 'vm.tiktok.com',
+                    'facebook.com', 'www.facebook.com', 'fb.watch',
+                    'twitter.com', 'x.com'
+                ];
+                return validDomains.some(domain => url.hostname.includes(domain));
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Simulate download API call (replace with actual API)
+        async function simulateDownload(url, format) {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Mock response data
+            const mockData = {
+                title: "Sample Video Title - Amazing Content",
+                thumbnail: "https://via.placeholder.com/80x80/667eea/ffffff?text=Video",
+                duration: "3:45",
+                size: format === 'mp4' ? "25.6" : "3.2",
+                downloadUrl: "#", // This would be the actual download URL from your API
+                format: format
+            };
+
+            // Simulate success/failure
+            if (Math.random() > 0.1) { // 90% success rate
+                return {
+                    success: true,
+                    data: mockData
+                };
+            } else {
+                return {
+                    success: false,
+                    message: "Failed to process the URL. Please try again."
+                };
+            }
+        }
+
+        // Show download result
+        function showDownloadResult(data) {
+            const resultDiv = document.getElementById('downloadResult');
+            const thumbnail = document.getElementById('resultThumbnail');
+            const title = document.getElementById('resultTitle');
+            const duration = document.getElementById('resultDuration');
+            const size = document.getElementById('resultSize');
+            const downloadLink = document.getElementById('downloadLink');
+
+            thumbnail.src = data.thumbnail;
+            title.textContent = data.title;
+            duration.textContent = `Duration: ${data.duration}`;
+            size.textContent = `Size: ${data.size} MB`;
+            downloadLink.href = data.downloadUrl;
+            downloadLink.onclick = () => {
+                // Track download
+                trackDownload(data.format);
+                // In a real implementation, this would trigger the actual download
+                alert(`Download started! (${data.format.toUpperCase()} format)`);
+            };
+
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Track downloads (for analytics)
+        function trackDownload(format) {
+            // Update stats
+            const downloads = localStorage.getItem('totalDownloads') || '0';
+            localStorage.setItem('totalDownloads', (parseInt(downloads) + 1).toString());
+            
+            console.log(`Download tracked: ${format} format`);
+        }
 
         // Animate stats on scroll
         const observerOptions = {
@@ -548,6 +1056,205 @@
         if (statsSection) {
             observer.observe(statsSection);
         }
+
+        // API Documentation Copy Function
+        function copyApiEndpoint(endpoint) {
+            navigator.clipboard.writeText(endpoint).then(() => {
+                // Show temporary success message
+                const toast = document.createElement('div');
+                toast.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #4CAF50;
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 8px;
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease;
+                `;
+                toast.textContent = 'API endpoint copied to clipboard!';
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            });
+        }
+
+        // Add copy functionality to API endpoints
+        document.addEventListener('DOMContentLoaded', () => {
+            const apiEndpoints = document.querySelectorAll('.api-endpoint');
+            apiEndpoints.forEach(endpoint => {
+                endpoint.style.cursor = 'pointer';
+                endpoint.title = 'Click to copy';
+                endpoint.addEventListener('click', () => {
+                    copyApiEndpoint(endpoint.textContent.trim());
+                });
+            });
+        });
+
+        // Mobile menu toggle (if needed)
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('mobile-active');
+        }
+
+        // Add mobile menu styles
+        const mobileMenuStyles = `
+            @media (max-width: 768px) {
+                .nav-links.mobile-active {
+                    display: flex;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background: rgba(102, 126, 234, 0.95);
+                    flex-direction: column;
+                    padding: 1rem;
+                    backdrop-filter: blur(10px);
+                }
+                
+                .mobile-menu-btn {
+                    display: block;
+                    background: none;
+                    border: none;
+                    color: white;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                }
+            }
+            
+            .mobile-menu-btn {
+                display: none;
+            }
+        `;
+
+        // Add mobile menu styles to head
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = mobileMenuStyles;
+        document.head.appendChild(styleSheet);
+
+        // Add mobile menu button to nav (if screen is small)
+        if (window.innerWidth <= 768) {
+            const nav = document.querySelector('nav');
+            const mobileBtn = document.createElement('button');
+            mobileBtn.className = 'mobile-menu-btn';
+            mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileBtn.onclick = toggleMobileMenu;
+            nav.appendChild(mobileBtn);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.remove('mobile-active');
+            }
+        });
+
+        // Preload important images
+        function preloadImages() {
+            const imageUrls = [
+                'https://via.placeholder.com/80x80/667eea/ffffff?text=Video'
+            ];
+            
+            imageUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', () => {
+            preloadImages();
+            
+            // Add enter key support for URL input
+            const urlInput = document.getElementById('mediaUrl');
+            urlInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    downloadMedia('mp4'); // Default to MP4
+                }
+            });
+
+            // Add URL validation on input
+            urlInput.addEventListener('input', (e) => {
+                const url = e.target.value.trim();
+                const buttons = document.querySelectorAll('.download-btn');
+                
+                if (url && isValidUrl(url)) {
+                    buttons.forEach(btn => btn.disabled = false);
+                    e.target.style.borderColor = '#4CAF50';
+                } else if (url) {
+                    buttons.forEach(btn => btn.disabled = true);
+                    e.target.style.borderColor = '#f44336';
+                } else {
+                    buttons.forEach(btn => btn.disabled = false);
+                    e.target.style.borderColor = '';
+                }
+            });
+
+            // Show welcome message
+            console.log('🐞 Ladybug Bot Website Loaded Successfully!');
+            console.log('Owner: Mr Ntando Ofc | WhatsApp: +263777124998');
+        });
+
+        // Service Worker for offline functionality (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Analytics tracking (replace with your analytics code)
+        function trackEvent(eventName, eventData = {}) {
+            // Google Analytics or other analytics service
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, eventData);
+            }
+            
+            // Console log for development
+            console.log('Event tracked:', eventName, eventData);
+        }
+
+        // Track page sections viewed
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    trackEvent('section_viewed', { section: sectionId });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe all main sections
+        document.querySelectorAll('section[id]').forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Error handling for uncaught errors
+        window.addEventListener('error', (e) => {
+            console.error('Global error:', e.error);
+            trackEvent('javascript_error', {
+                message: e.message,
+                filename: e.filename,
+                lineno: e.lineno
+            });
+        });
+
+        // Handle unhandled promise rejections
+        window.addEventListener('unhandledrejection', (e) => {
+            console.error('Unhandled promise rejection:', e.reason);
+            trackEvent('promise_rejection', {
+                reason: e.reason.toString()
+            });
+        });
     </script>
 </body>
 </html>
