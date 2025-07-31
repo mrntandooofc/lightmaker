@@ -1,353 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1" />
- <title>GODLY TECH IS DEV SITE</title>
- <style>
- body {
- margin:0;
- font-family: Arial, sans-serif;
- background: linear-gradient(135deg, #0b1a3d, #1d3261);
- color: #fff;
- background-size: cover;
- background-position: center;
- overflow-x: hidden;
- }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ladybug Bot - The Ultimate WhatsApp Assistant</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
- .container {
- max-width:1200px;
- margin:30px auto;
- padding:10px 20px;
- }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
 
- h1 {
- text-align: center;
- font-size:2rem;
- font-weight: bold;
- margin-bottom:20px;
- color: #ffffff;
- text-shadow:0 0 10px #2FD1F4;
- }
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
 
- .card-container {
- display: flex;
- flex-wrap: wrap;
- gap: 20px;
- justify-content: center;
- }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
- .card-button {
- display: block;
- background: #1d3261;
- border-radius:12px;
- border:2px solid #14718B87;
- padding:20px;
- width: calc(25% - 20px);
- text-decoration: none;
- color: #ffffff;
- box-shadow:0 4px 8px rgba(37,38,39,0.58);
- text-shadow:0 0 10px rgba(11,184,206,1);
- transition: background 0.3s ease;
- }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
 
- .card-button:hover {
- background: #2a4b8c;
- box-shadow:0 0 10px rgba(3,157,255,1);
- text-shadow:0 0 10px rgba(255,250,255,1);
- }
+        .logo i {
+            margin-right: 0.5rem;
+            color: #ff6b6b;
+        }
 
- .card-button h2 {
- margin:0 0 8px 0;
- font-size:1.3rem;
- }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
 
- .card-button p {
- margin:0;
- font-size:0.95rem;
- opacity:0.85;
- }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
 
- .button-container {
- background: linear-gradient(90deg, #4A86E8AD, #7EB5FBA3);
- border-radius:20px;
- padding:15px 20px;
- display: flex;
- flex-wrap: wrap;
- gap:10px;
- text-shadow:0 0 10px #16ACD6;
- border:2px solid #14718B87;
- justify-content: space-between;
- align-items: center;
- box-shadow:0 5px 10px rgba(67,114,140,0.7);
- }
+        .nav-links a:hover {
+            color: #ff6b6b;
+        }
 
- .button-container a {
- color: #fff;
- text-decoration: none;
- font-weight: bold;
- padding:8px 15px;
- background: rgba(255,255,255,0.15);
- border-radius:10px;
- transition: background 0.3s ease;
- display: inline-flex;
- align-items: center;
- }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
- .button-container a:hover {
- background: rgba(255,255,255,0.3);
- box-shadow:0 0 10px #00B4FF;
- }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
 
- #background-style {
- margin-bottom:20px;
- }
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
 
- #background-style label {
- display: block;
- margin-bottom:10px;
- }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
 
- #background-style select {
- padding:10px;
- border: none;
- border-radius:10px;
- background: #1d3261;
- color: #fff;
- }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
 
- #project-upload {
- margin-bottom:20px;
- }
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
 
- #project-upload label {
- display: block;
- margin-bottom:10px;
- }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
 
- #project-upload input[type="file"] {
- padding:10px;
- border: none;
- border-radius:10px;
- background: #1d3261;
- color: #fff;
- }
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
 
- #project-upload button {
- padding:10px 20px;
- border: none;
- border-radius:10px;
- background: #2a4b8c;
- color: #fff;
- cursor: pointer;
- }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
- .animation {
- position: relative;
- width:100%;
- height:50px;
- margin-bottom:20px;
- }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
 
- .animation::before {
- content: '';
- position: absolute;
- top:0;
- left:0;
- width:100%;
- height:100%;
- background: linear-gradient(90deg, #4A86E8AD, #7EB5FBA3);
- opacity:0.5;
- filter: blur(10px);
- }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
 
- .animation::after {
- content: 'Mr Ntando Ofc';
- position: absolute;
- top:50%;
- left:50%;
- transform: translate(-50%, -50%);
- font-size:24px;
- font-weight: bold;
- color: #fff;
- text-shadow:0 0 10px #2FD1F4;
- animation: typing 3s steps(11) infinite;
- overflow: hidden;
- white-space: nowrap;
- border-right:2px solid #fff;
- }
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
 
- @keyframes typing {
- 0% {
- width:0;
- }
- 50% {
- width:100%;
- }
- 100% {
- width:0;
- }
- }
- </style>
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Commands Section */
+        .commands {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .command-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .command-item:hover {
+            transform: scale(1.05);
+        }
+
+        .command-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .command-item p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: #ff6b6b;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ff6b6b;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
 </head>
-
 <body>
- <div class="container">
- <h1>GODLY TECH IS DEV SITE</h1>
- <div class="animation"></div>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-bug"></i>
+                Ladybug Bot
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#commands">Commands</a></li>
+                <li><a href="#stats">Stats</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
- <!-- Background Style -->
- <div id="background-style">
- <label for="background-select">Select Background Style:</label>
- <select id="background-select" onchange="changeBackgroundStyle(this.value)">
- <option value="default">Default</option>
- <option value="dark">Dark</option>
- <option value="light">Light</option>
- <option value="image">Image</option>
- </select>
- </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="floating">🐞 <span class="gradient-text">Ladybug Bot</span></h1>
+            <p>The most advanced WhatsApp bot with powerful features, AI capabilities, and seamless automation</p>
+            <a href="#features" class="cta-button">
+                <i class="fas fa-rocket"></i> Explore Features
+            </a>
+        </div>
+    </section>
 
- <!-- Project Upload -->
- <div id="project-upload">
- <label for="project-file">Upload Your Project:</label>
- <input type="file" id="project-file" />
- <button onclick="uploadProject()">Upload</button>
- <div id="upload-status"></div>
- </div>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">🌟 Amazing Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>Media Downloader</h3>
+                    <p>Download videos, music, and images from YouTube, Instagram, TikTok, and more platforms instantly</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Assistant</h3>
+                    <p>Powered by advanced AI for intelligent conversations, questions answering, and creative tasks</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Group Management</h3>
+                    <p>Complete group administration with moderation tools, welcome messages, and auto-responses</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Image Tools</h3>
+                    <p>Create stickers, edit images, generate memes, and apply filters with advanced image processing</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Fun & Games</h3>
+                    <p>Interactive games, trivia, jokes, quotes, and entertainment features to keep chats lively</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security Tools</h3>
+                    <p>Advanced security features, spam protection, and privacy controls for safe chatting</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
- <!-- Card Container -->
- <div class="card-container">
- <!-- AI Tools Button -->
- <a href="html.html" class="card-button" target="_blank" style="background: #3498db;">
- <h2></> Html code run</h2>
- <p>run html code</p>
- </a>
+    <!-- Commands Section -->
+    <section id="commands" class="commands">
+        <div class="container">
+            <h2 class="section-title">⚡ Popular Commands</h2>
+            <div class="commands-grid">
+                <div class="command-item">
+                    <h4>📥 .ytmp4 [url]</h4>
+                    <p>Download YouTube videos in MP4 format</p>
+                </div>
+                <div class="command-item">
+                    <h4>🎵 .ytmp3 [url]</h4>
+                    <p>Download YouTube audio as MP3</p>
+                </div>
+                <div class="command-item">
+                    <h4>🤖 .ai [question]</h4>
+                    <p>Ask AI assistant anything</p>
+                </div>
+                <div class="command-item">
+                    <h4>🎨 .sticker</h4>
+                    <p>Convert image to sticker</p>
+                </div>
+                <div class="command-item">
+                    <h4>📊 .weather [city]</h4>
+                    <p>Get weather information</p>
+                </div>
+                <div class="command-item">
+                    <h4>🎮 .game</h4>
+                    <p>Play interactive games</p>
+                </div>
+                <div class="command-item">
+                    <h4>📰 .news</h4>
+                    <p>Get latest news updates</p>
+                </div>
+                <div class="command-item">
+                    <h4>🔍 .google [query]</h4>
+                    <p>Search Google instantly</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
- <!-- Coding Button -->
- <a href="extractor.html" class="card-button" target="_blank" style="background: #e74c3c;">
- <h2>Extractor</h2>
- <p>website source code finder</p>
- </a>
- <a href="gpt.html" class="card-button" target="_blank" style="background: #2ecc71;">
- <h2>ChatGPT</h2>
- <p>Advanced Artificial intelligence</p>
- </a>
- <a href="netntando.html" class="card-button" target="_blank" style="background: #9b59b6;">
- <h2>Netntando</h2>
- <p>download movies from Netflix, moviebox and more made by Mr Ntando Ofc </p>
- </a>
- <a href="report.html" class="card-button" target="_blank" style="background: #1abc9c;">
- <h2>Report</h2>
- <p>send us report</p>
- </a>
+    <!-- Stats Section -->
+    <section id="stats" class="stats">
+        <div class="container">
+            <h2 class="section-title">📈 Impressive Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>50K+</h3>
+                    <p>Active Users</p>
+                </div>
+                <div class="stat-item">
+                    <h3>1M+</h3>
+                    <p>Commands Executed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100+</h3>
+                    <p>Features Available</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Uptime Guarantee</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
- <a href="admin.html" class="card-button" target="_blank" style="background: #f1c40f;">
- <h2>Admin</h2>
- <p>website source code finder</p>
- </a>
- <a href="hype.html" class="card-button" target="_blank" style="background: #d35400;">
- <h2>Hype WhatsApp Channels and Group Links</h2>
- <p>made with love </p>
- </a>
- <a href="netflix.html" class="card-button" target="_blank" style="background: #e67e22;">
- <h2>Netflix Premium</h2>
- <p>All features unlocked by Mr Ntando Ofc</p>
- </a>
- <a href="vcf.html" class="card-button" target="_blank" style="background: #16a085;">
- <h2>Increase Status Views</h2>
- <p>WhatsApp status views increase made by Mr Ntando Ofc</p>
- </a>
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h3>🐞 Ladybug Bot</h3>
+            <p>The ultimate WhatsApp assistant for all your needs</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+            <p>© 2024 Ladybug Bot. All rights reserved.</p>
+            <p>Made with ❤️ for the WhatsApp community</p>
+        </div>
+    </footer>
 
- <a href="github.html" class="card-button" target="_blank" style="background: #27ae60;">
- <h2>LADYBUG-BOT</h2>
- <p>best WhatsApp bot with rich features</p>
- </a>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
- <a href="pairsite.html" class="card-button" target="_blank" style="background: #2980b9;">
- <h2>Pair Site</h2>
- <p>get creds.json and use it to run Ladybug bot</p>
- </a>
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.backdropFilter = 'none';
+            }
+        });
 
- <a href="spotify.html" class="card-button" target="_blank" style="background: #8e44ad;">
- <h2>Spotify Premium</h2>
- <p>All features unlocked by Mr Ntando Ofc</p>
- </a>
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
 
- <!-- Coding Button -->
- <a href="js.html" class="card-button" target="_blank" style="background: #f39c12;">
- <h2>Js Encrypt</h2>
- <p>Javscript obfuscator tool</p>
- </a>
- </div>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-item h3');
+                    statNumbers.forEach(stat => {
+                        const finalNumber = stat.textContent;
+                        const numericValue = parseInt(finalNumber.replace(/\D/g, ''));
+                        const suffix = finalNumber.replace(/\d/g, '');
+                        
+                        let current = 0;
+                        const increment = numericValue / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= numericValue) {
+                                stat.textContent = finalNumber;
+                                clearInterval(timer);
+                            } else {
+                                stat.textContent = Math.floor(current) + suffix;
+                            }
+                        }, 30);
+                    });
+                }
+            });
+        }, observerOptions);
 
- <!-- Bottom Button Row -->
- <div class="button-container">
- <a href="https://t.me/mrntando" target="_blank"></> learn coding</a>
- <a href="https://wa.me/263777124998" target="_blank">Our Projects</a>
- <a href="https://wa.me/263777124998" target="_blank"> Support</a>
- <a href="https://whatsapp.com/channel/0029VbAhndjKLaHneeiTAy3J" target="_blank">W.A Chanel</a>
- </div>
-
- <!-- Background Audio -->
- <audio id="background-audio" loop>
- <source src="https://files.catbox.moe/q8lo8b.mp3" type="audio/mp3">
- </audio>
-
- <script>
- function changeBackgroundStyle(style) {
- switch (style) {
- case 'default':
- document.body.style.background = '#0b1a3d';
- break;
- case 'dark':
- document.body.style.background = '#000';
- break;
- case 'light':
- document.body.style.background = '#fff';
- break;
- case 'image':
- document.body.style.backgroundImage = 'url(https://example.com/background-image.jpg)';
- document.body.style.backgroundSize = 'cover';
- document.body.style.backgroundPosition = 'center';
- break;
- }
- }
-
- async function uploadProject() {
- const fileInput = document.getElementById('project-file');
- const file = fileInput.files[0];
- const uploadStatus = document.getElementById('upload-status');
-
- if (file) {
- const formData = new FormData();
- formData.append('file', file);
-
- try {
- const response = await fetch('/upload', {
- method: 'POST',
- body: formData,
- });
-
- if (response.ok) {
- uploadStatus.textContent = 'File uploaded successfully!';
- } else {
- uploadStatus.textContent = 'Error uploading file';
- }
- } catch (error) {
- console.error(error);
- uploadStatus.textContent = 'Error uploading file';
- }
- } else {
- uploadStatus.textContent = 'No file selected';
- }
- }
-
- // Play background audio on page load
- document.addEventListener('DOMContentLoaded', () => {
- const audio = document.getElementById('background-audio');
- audio.play();
- });
- </script>
- </div>
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
 </body>
 </html>
